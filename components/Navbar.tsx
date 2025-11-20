@@ -3,14 +3,17 @@
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
     router.push('/');
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -24,7 +27,7 @@ export default function Navbar() {
               </span>
             </Link>
             {user && (
-              <div className="ml-10 flex items-baseline space-x-4">
+              <div className="hidden md:ml-10 md:flex md:items-baseline md:space-x-4">
                 <Link 
                   href="/matches" 
                   className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium"
@@ -46,14 +49,16 @@ export default function Navbar() {
               </div>
             )}
           </div>
-          <div className="flex items-center">
+          
+          {/* Desktop menu */}
+          <div className="hidden md:flex md:items-center">
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link href="/profile" className="text-white hover:text-gray-200">
                   <div className="flex items-center space-x-2">
                     <div className="text-right">
                       <div className="text-sm font-medium">{user.username}</div>
-                      <div className="text-xs text-gray-400">
+                      <div className="text-xs text-white">
                         {user.wins}W - {user.losses}L
                       </div>
                     </div>
@@ -83,8 +88,90 @@ export default function Navbar() {
               </div>
             )}
           </div>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-200 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+            >
+              <span className="sr-only">Open main menu</span>
+              {!mobileMenuOpen ? (
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              ) : (
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Profile ({user.username}) - {user.wins}W - {user.losses}L
+                </Link>
+                <Link
+                  href="/matches"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Find Matches
+                </Link>
+                <Link
+                  href="/my-matches"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  My Matches
+                </Link>
+                <Link
+                  href="/create-match"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Create Match
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-white hover:bg-gray-800 block w-full text-left px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
