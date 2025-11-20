@@ -1,16 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { matchAPI, GameTitle, GameMode } from '@/lib/api';
 
-// Modern Warfare 2 maps
-const MW2_MAPS = [
-  'Afghan', 'Derail', 'Estate', 'Favela', 'Highrise', 'Invasion', 
-  'Karachi', 'Quarry', 'Rundown', 'Rust', 'Scrapyard', 'Skidrow', 
-  'Sub Base', 'Terminal', 'Underpass', 'Wasteland'
-];
+// Game maps by title
+const GAME_MAPS: Record<GameTitle, string[]> = {
+  'Modern Warfare 2': [
+    'Afghan', 'Derail', 'Estate', 'Favela', 'Highrise', 'Invasion', 
+    'Karachi', 'Quarry', 'Rundown', 'Rust', 'Scrapyard', 'Skidrow', 
+    'Sub Base', 'Terminal', 'Underpass', 'Wasteland'
+  ],
+  'Black Ops': [
+    'Array', 'Cracked', 'Crisis', 'Firing Range', 'Grid', 'Hanoi', 
+    'Havana', 'Jungle', 'Launch', 'Nuketown', 'Radiation', 'Summit', 
+    'Villa', 'WMD'
+  ],
+  'Modern Warfare 3': [
+    'Arkaden', 'Bakaara', 'Bootleg', 'Carbon', 'Dome', 'Downturn', 
+    'Fallen', 'Hardhat', 'Interchange', 'Lockdown', 'Mission', 'Resistance', 
+    'Seatown', 'Underground', 'Village'
+  ],
+  'Black Ops 2': [
+    'Aftermath', 'Cargo', 'Carrier', 'Drone', 'Express', 'Hijacked', 
+    'Meltdown', 'Overflow', 'Plaza', 'Raid', 'Slums', 'Standoff', 
+    'Turbine', 'Yemen'
+  ]
+};
 
 const GAME_TITLES: GameTitle[] = ['Modern Warfare 2', 'Black Ops', 'Modern Warfare 3', 'Black Ops 2'];
 const GAME_MODES: GameMode[] = ['Search and Destroy', 'Capture the Flag', 'Domination', 'Team Deathmatch'];
@@ -26,6 +43,14 @@ export default function CreateMatchPage() {
   const [bestOf, setBestOf] = useState(3);
   const [teamName, setTeamName] = useState(user?.teamName || user?.username || '');
   const [selectedMaps, setSelectedMaps] = useState<string[]>([]);
+
+  // Get available maps for the selected game
+  const availableMaps = GAME_MAPS[gameTitle];
+
+  // Reset selected maps when game changes
+  useEffect(() => {
+    setSelectedMaps([]);
+  }, [gameTitle]);
 
   if (!user) {
     router.push('/login');
@@ -154,7 +179,7 @@ export default function CreateMatchPage() {
                 Select {bestOf} Map{bestOf > 1 ? 's' : ''} ({selectedMaps.length}/{bestOf} selected)
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                {MW2_MAPS.map(map => (
+                {availableMaps.map(map => (
                   <button
                     key={map}
                     type="button"
