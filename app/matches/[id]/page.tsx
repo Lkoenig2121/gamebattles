@@ -136,7 +136,7 @@ export default function MatchDetailPage() {
                 {match.status.replace('-', ' ').toUpperCase()}
               </span>
             </div>
-            <div className="text-gray-400">
+            <div className="text-white">
               {match.gameMode} • Best of {match.bestOf}
             </div>
           </div>
@@ -194,14 +194,14 @@ export default function MatchDetailPage() {
 
           {/* Maps */}
           <div className="mb-6">
-            <h2 className="text-xl font-bold mb-4">Maps</h2>
+            <h2 className="text-xl font-bold text-white mb-4">Maps</h2>
             <div className="space-y-3">
               {match.maps.map((map, idx) => {
                 const result = match.mapResults[idx];
                 return (
                   <div key={idx} className="bg-gray-800 p-4 rounded-lg">
                     <div className="flex justify-between items-center">
-                      <div className="font-medium">{map}</div>
+                      <div className="font-medium text-white">{map}</div>
                       {result && (
                         <div className="flex gap-4 text-sm">
                           <span className={result.winner === 'team1' ? 'text-green-400 font-bold' : ''}>
@@ -285,7 +285,7 @@ export default function MatchDetailPage() {
           )}
 
           {/* Match Info */}
-          <div className="mt-6 pt-6 border-t border-gray-800 text-sm text-gray-400">
+          <div className="mt-6 pt-6 border-t border-gray-800 text-sm text-white">
             <div>Created: {new Date(match.createdAt).toLocaleString()}</div>
             {match.completedAt && (
               <div>Completed: {new Date(match.completedAt).toLocaleString()}</div>

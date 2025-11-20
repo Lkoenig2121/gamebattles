@@ -50,7 +50,7 @@ export default function ProfilePage() {
                 {user.username}
               </h1>
               {user.teamName && (
-                <div className="text-xl text-gray-400">{user.teamName}</div>
+                <div className="text-xl text-white">{user.teamName}</div>
               )}
             </div>
           </div>
@@ -61,25 +61,25 @@ export default function ProfilePage() {
               <div className="text-3xl font-bold text-green-400">
                 {user.wins}
               </div>
-              <div className="text-sm text-gray-400 mt-1">Wins</div>
+              <div className="text-sm text-white mt-1">Wins</div>
             </div>
             <div className="bg-gray-800 p-4 rounded-lg text-center">
               <div className="text-3xl font-bold text-red-400">
                 {user.losses}
               </div>
-              <div className="text-sm text-gray-400 mt-1">Losses</div>
+              <div className="text-sm text-white mt-1">Losses</div>
             </div>
             <div className="bg-gray-800 p-4 rounded-lg text-center">
               <div className="text-3xl font-bold text-blue-400">
                 {user.wins + user.losses}
               </div>
-              <div className="text-sm text-gray-400 mt-1">Total Matches</div>
+              <div className="text-sm text-white mt-1">Total Matches</div>
             </div>
             <div className="bg-gray-800 p-4 rounded-lg text-center">
               <div className="text-3xl font-bold text-yellow-400">
                 {winRate}%
               </div>
-              <div className="text-sm text-gray-400 mt-1">Win Rate</div>
+              <div className="text-sm text-white mt-1">Win Rate</div>
             </div>
           </div>
         </div>
@@ -118,15 +118,15 @@ export default function ProfilePage() {
                           {won ? "WIN" : "LOSS"}
                         </div>
                         <div>
-                          <div className="font-medium">{match.gameTitle}</div>
-                          <div className="text-sm text-gray-400">
+                          <div className="font-medium text-white">{match.gameTitle}</div>
+                          <div className="text-sm text-white">
                             vs {opponentTeam?.name || "Unknown"} •{" "}
                             {match.gameMode}
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-white">
                           {new Date(match.completedAt!).toLocaleDateString()}
                         </div>
                       </div>
@@ -145,12 +145,12 @@ export default function ProfilePage() {
           </h2>
           <div className="space-y-4">
             <div>
-              <div className="text-sm text-gray-400">Email</div>
-              <div className="font-medium">{user.email}</div>
+              <div className="text-sm text-white">Email</div>
+              <div className="font-medium text-white">{user.email}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400">Member Since</div>
-              <div className="font-medium">
+              <div className="text-sm text-white">Member Since</div>
+              <div className="font-medium text-white">
                 {new Date(user.createdAt).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",

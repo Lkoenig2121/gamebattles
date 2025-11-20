@@ -65,11 +65,11 @@ export default function MyMatchesPage() {
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="text-gray-400">Loading matches...</div>
+            <div className="text-white">Loading matches...</div>
           </div>
         ) : matches.length === 0 ? (
           <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">You haven't participated in any matches yet</div>
+            <div className="text-white mb-4">You haven't participated in any matches yet</div>
             <Link
               href="/matches"
               className="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
@@ -87,8 +87,8 @@ export default function MyMatchesPage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{match.gameTitle}</h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-400">
+                    <h3 className="text-xl font-bold text-white mb-2">{match.gameTitle}</h3>
+                    <div className="flex items-center gap-3 text-sm text-white">
                       <span>{match.gameMode}</span>
                       <span>•</span>
                       <span>Best of {match.bestOf}</span>
@@ -105,7 +105,7 @@ export default function MyMatchesPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-gray-400">
+                    <div className="text-sm text-white">
                       {new Date(match.createdAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default function MyMatchesPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-gray-800 p-4 rounded">
                     <div className="text-sm text-gray-400 mb-1">Team 1</div>
-                    <div className="font-semibold">
+                    <div className="font-semibold text-white">
                       {match.team1.name}
                       {match.winner === 'team1' && ' 🏆'}
                     </div>
@@ -122,7 +122,7 @@ export default function MyMatchesPage() {
                   {match.team2 ? (
                     <div className="bg-gray-800 p-4 rounded">
                       <div className="text-sm text-gray-400 mb-1">Team 2</div>
-                      <div className="font-semibold">
+                      <div className="font-semibold text-white">
                         {match.team2.name}
                         {match.winner === 'team2' && ' 🏆'}
                       </div>

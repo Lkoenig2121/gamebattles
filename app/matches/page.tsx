@@ -103,8 +103,8 @@ export default function MatchesPage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{match.gameTitle}</h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-400">
+                    <h3 className="text-xl font-bold text-white mb-2">{match.gameTitle}</h3>
+                    <div className="flex items-center gap-3 text-sm text-white">
                       <span>{match.gameMode}</span>
                       <span>•</span>
                       <span>Best of {match.bestOf}</span>
@@ -115,7 +115,7 @@ export default function MatchesPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-gray-400">
+                    <div className="text-sm text-white">
                       Created {new Date(match.createdAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -124,12 +124,12 @@ export default function MatchesPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-gray-800 p-4 rounded">
                     <div className="text-sm text-gray-400 mb-1">Team 1</div>
-                    <div className="font-semibold">{match.team1.name}</div>
+                    <div className="font-semibold text-white">{match.team1.name}</div>
                   </div>
                   {match.team2 ? (
                     <div className="bg-gray-800 p-4 rounded">
                       <div className="text-sm text-gray-400 mb-1">Team 2</div>
-                      <div className="font-semibold">{match.team2.name}</div>
+                      <div className="font-semibold text-white">{match.team2.name}</div>
                     </div>
                   ) : (
                     <div className="bg-gray-800 p-4 rounded border-2 border-dashed border-gray-700">
@@ -140,10 +140,10 @@ export default function MatchesPage() {
                 </div>
 
                 <div className="mt-4">
-                  <div className="text-sm text-gray-400 mb-2">Maps:</div>
+                  <div className="text-sm text-white mb-2">Maps:</div>
                   <div className="flex flex-wrap gap-2">
                     {match.maps.map((map, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-gray-800 rounded-full text-sm">
+                      <span key={idx} className="px-3 py-1 bg-gray-800 rounded-full text-sm text-white">
                         {map}
                       </span>
                     ))}
