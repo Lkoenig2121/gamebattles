@@ -16,6 +16,25 @@ const getAIResponse = (message: string): string => {
     return "To create a match, click 'Create Match' in the navigation menu, select your game, mode, maps, and your team name. Then wait for an opponent to join!";
   }
 
+  if (lowerMessage.includes('set up') || lowerMessage.includes('setup')) {
+    if (lowerMessage.includes('modern warfare 2') || lowerMessage.includes('mw2')) {
+      return "To set up a Modern Warfare 2 match: 1) Click 'Create Match' in the menu, 2) Select 'Modern Warfare 2' as the game, 3) Choose your game mode (Search and Destroy, CTF, Domination, or TDM), 4) Pick your maps (Afghan, Terminal, Rust, etc.), 5) Enter your team name and click 'Create Match'. Then wait for an opponent to join!";
+    }
+    if (lowerMessage.includes('modern warfare 3') || lowerMessage.includes('mw3')) {
+      return "To set up a Modern Warfare 3 match: 1) Click 'Create Match', 2) Select 'Modern Warfare 3', 3) Choose your game mode, 4) Pick maps like Dome, Hardhat, or Arkaden, 5) Enter your team name and create the match!";
+    }
+    if (lowerMessage.includes('black ops 2') || lowerMessage.includes('bo2')) {
+      return "To set up a Black Ops 2 match: 1) Click 'Create Match', 2) Select 'Black Ops 2', 3) Choose your game mode, 4) Pick maps like Raid, Standoff, or Hijacked, 5) Enter your team name and you're ready!";
+    }
+    if (lowerMessage.includes('black ops') || lowerMessage.includes('bo')) {
+      return "To set up a Black Ops match: 1) Click 'Create Match', 2) Select 'Black Ops', 3) Choose your game mode, 4) Pick maps like Nuketown, Firing Range, or Summit, 5) Enter your team name and create!";
+    }
+    if (lowerMessage.includes('modern warfare') || lowerMessage.includes('mw')) {
+      return "To set up a Modern Warfare match: 1) Click 'Create Match' in the navigation menu, 2) Select your Modern Warfare game (MW2 or MW3), 3) Choose a game mode, 4) Select your maps, 5) Enter your team name and create the match. An opponent will join soon!";
+    }
+    return "To set up a match, click 'Create Match' in the menu, select your game (Modern Warfare 2, Black Ops, MW3, or Black Ops 2), choose your mode and maps, enter your team name, and create! What game would you like to play?";
+  }
+
   if (lowerMessage.includes('map') || lowerMessage.includes('maps')) {
     return "Each game has its own set of maps! Select your game when creating a match to see available maps. You can choose between 1, 3, or 5 maps per match.";
   }
