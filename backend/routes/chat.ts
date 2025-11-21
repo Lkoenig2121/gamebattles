@@ -1,5 +1,5 @@
 import express from 'express';
-import { authenticateToken } from '../middleware/auth';
+import { authMiddleware } from '../middleware/auth';
 
 const router = express.Router();
 
@@ -80,7 +80,7 @@ const getAIResponse = (message: string): string => {
 };
 
 // Chat endpoint
-router.post('/message', authenticateToken, async (req, res) => {
+router.post('/message', authMiddleware, async (req, res) => {
   try {
     const { message } = req.body;
 

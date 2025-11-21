@@ -1,26 +1,31 @@
 import express from 'express';
-import User from '../models/User';
-import connectDB from '../utils/db';
+import { db } from '../utils/db';
 
 const router = express.Router();
+
+interface LeaderboardEntry {
+  id: string;
+  username: string;
+  teamName?: string;
+  wins: number;
+  losses: number;
+  totalMatches: number;
+  winRate: number;
+}
 
 // Get leaderboard
 router.get('/', async (req, res) => {
   try {
-    await connectDB();
-
-    const users = await User.find({})
-      .select('username teamName wins losses')
-      .lean();
+    const users = db.users.getAll();
 
     // Calculate stats and sort
-    const leaderboard = users
-      .map(user => {
+    const leaderboard: LeaderboardEntry[] = users
+      .map((user) => {
         const totalMatches = user.wins + user.losses;
         const winRate = totalMatches > 0 ? (user.wins / totalMatches) * 100 : 0;
         
         return {
-          id: user._id.toString(),
+          id: user.id,
           username: user.username,
           teamName: user.teamName,
           wins: user.wins,
@@ -29,7 +34,7 @@ router.get('/', async (req, res) => {
           winRate: parseFloat(winRate.toFixed(1))
         };
       })
-      .sort((a, b) => {
+      .sort((a: LeaderboardEntry, b: LeaderboardEntry) => {
         // Sort by wins first, then by win rate
         if (b.wins !== a.wins) {
           return b.wins - a.wins;
