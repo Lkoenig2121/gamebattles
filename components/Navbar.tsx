@@ -46,6 +46,12 @@ export default function Navbar() {
                 >
                   Create Match
                 </Link>
+                <Link 
+                  href="/leaderboard" 
+                  className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Leaderboard
+                </Link>
               </div>
             )}
           </div>
@@ -143,6 +149,13 @@ export default function Navbar() {
                   className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Create Match
+                </Link>
+                <Link
+                  href="/leaderboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white hover:bg-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Leaderboard
                 </Link>
                 <button
                   onClick={handleLogout}

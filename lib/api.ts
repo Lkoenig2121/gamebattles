@@ -135,3 +135,34 @@ export const matchAPI = {
   },
 };
 
+export interface LeaderboardEntry {
+  id: string;
+  username: string;
+  teamName?: string;
+  wins: number;
+  losses: number;
+  totalMatches: number;
+  winRate: number;
+}
+
+export const leaderboardAPI = {
+  getLeaderboard: async (): Promise<{ leaderboard: LeaderboardEntry[] }> => {
+    return fetchAPI('/leaderboard');
+  },
+};
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+}
+
+export const chatAPI = {
+  sendMessage: async (message: string): Promise<{ response: string; timestamp: string }> => {
+    return fetchAPI('/chat/message', {
+      method: 'POST',
+      body: JSON.stringify({ message }),
+    });
+  },
+};
+
